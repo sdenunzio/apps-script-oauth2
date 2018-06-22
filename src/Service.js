@@ -348,13 +348,15 @@ Service_.prototype.handleCallback = function(callbackRequest) {
   if (this.tokenHeaders_) {
     headers = extend_(headers, this.tokenHeaders_);
   }
-  var tokenPayload = {
+  var tokenBase = {
     code: code,
     client_id: this.clientId_,
     client_secret: this.clientSecret_,
     redirect_uri: redirectUri,
     grant_type: 'authorization_code'
   };
+  headers = extend_(headers, tokenBase);
+  
   if (this.tokenPayloadHandler_) {
     tokenPayload = this.tokenPayloadHandler_(tokenPayload);
   }
